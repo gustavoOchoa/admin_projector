@@ -1,0 +1,58 @@
+.pr_theme{
+    padding: 0px 0px 0px 0px;
+}
+.pr_no_folder{
+    width:25px;
+    height: 25px;
+}
+.pr_doc{
+    filter: invert();
+    background-image: url('../../public/images/file.svg');
+    background-size: cover;
+    width: 16px;
+    height: 16px;
+}
+.pr_list{
+    filter: invert();
+    background-image: url('../../public/images/list.svg');
+    background-size: cover;
+    width: 16px;
+    height: 16px;
+}
+.caret_right{
+    filter: invert();
+    background-image: url('../../public/images/toggler_icon_close.svg');
+    background-size: cover;
+    width: 16px;
+    height: 16px;
+    transition: all ease .35s;
+}
+.caret_down{
+    filter: invert();
+    background-image: url('../../public/images/toggler_icon_close.svg');
+    background-size: cover;
+    width: 16px;
+    height: 16px;
+    transform: rotate(90deg);
+    transition: all ease .35s;
+}
+.folder_dots{
+    height: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 6px;
+    float: right;
+    background-color: transparent;
+    color: rgb(255,255,255);
+    border: none;
+}
+.folder_dots:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.folder_dots:focus, .folder_dots:focus-visible{
+    border: none;
+    box-shadow: none;
+}
+.folder{
+    width: 70%;
+}
