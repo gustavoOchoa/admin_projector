@@ -42,6 +42,8 @@ $routes->post('/project', 'ProjectController::index',  ['filter' => 'cors']);
 $routes->post('/project/new_project', 'ProjectController::newProject',  ['filter' => 'cors']);
 $routes->post('/project/get_list', 'ProjectController::getList',  ['filter' => 'cors']);
 $routes->post('/project/get_node', 'ProjectController::getInternalNode',  ['filter' => 'cors']);
+
+$routes->post('/test', 'Test::index');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

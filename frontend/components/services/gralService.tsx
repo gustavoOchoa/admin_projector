@@ -7,8 +7,8 @@ export const NodeService = {
             try {
                 let urlencoded = new URLSearchParams();
                 urlencoded.append("uid", id_project);
-                const res = await API.post(process.env['BACKEND'] + '/project/get_list', urlencoded);
-                resolve(res.data.list);
+                const res = await API.post(process.env['BACKEND'] + '/test', urlencoded);
+                resolve(res.data);
             }
             catch (e) {
                 reject(e);

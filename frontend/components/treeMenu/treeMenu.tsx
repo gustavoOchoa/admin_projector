@@ -60,23 +60,6 @@ export default function TreeMenu(props: InterTreeMenu){
         );
     };
 
-    const loadOnExpand = async (event: any) => {
-        if (!event.node.children) {
-            setLoading(true);
-            let node = { ...event.node };
-            node.children = [];
-            setLoading(false);
-            /** llamamos al endpoint que nos trae los children */
-            const children = await NodeService.getNode(props.id_project, node.key);
-            if(children.length !== 0){
-                console.log(node.key, children);
-                let updatedNode = await updateTree(nodes, node.key, children);
-                setNodes(updatedNode);
-            }
-            setLoading(false);
-        }
-    }
-    
     useEffect(() => {
         const fetchList = async () => {
             const result = await NodeService.getStartNodes(props.id_project);
@@ -90,7 +73,6 @@ export default function TreeMenu(props: InterTreeMenu){
         <div className="card flex justify-content-center">
             <Tree 
                 value={nodes} 
-                onExpand={loadOnExpand} 
                 loading={loading} 
                 className={['w-full', st.pr_theme].join(' ')}
                 nodeTemplate={nodeTemplate}
@@ -98,23 +80,4 @@ export default function TreeMenu(props: InterTreeMenu){
             />
         </div>
     );
-}
-
-async function updateTree(nodes: nodeInter[], key: number, children: nodeInter[]){
-    const searchNode = (nodes: nodeInter[]) => {
-        return nodes.map((nod) => {
-            if(parseInt(nod.key) == key){
-                nod.children = [];
-                children.forEach((child) => {
-                    nod.children?.push(child);
-                });
-            }
-            else if(nod.children){
-                searchNode(nod.children);
-            }
-            return nod;
-        });
-    }
-
-    return searchNode(nodes);
 }
