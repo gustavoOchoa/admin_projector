@@ -14,24 +14,25 @@ export default function TreeMenu(props: InterTreeMenu){
             return (
                 <>
                     <span className={[options.className, st.folder].join(' ')}>{node.label}</span>
-                    <DotPanel id_project={props.id_project} id_folder={node.key}/>
+                    <DotPanel type={node.type} id_project={props.id_project} id_folder={node.key} name={node.label} />
                 </>
             )
         }
         else{
             return (
                 <>
-                    <Link 
+                    <Link
                         href={(node.type === 'list')? `/list/${node.key}` : `/document/${node.key}`}
                         className={[options.className, st.label].join(' ')}
                     >
                         {node.label}
                     </Link>
+                    <DotPanel type={node.type} id_project={props.id_project} id_folder={node.key} name={node.label} />
                 </>
             ); 
         }
-        
     }
+
     const togglerTemplate = (node: any, options:any) => {
         if (!node) {
             return;
@@ -68,6 +69,15 @@ export default function TreeMenu(props: InterTreeMenu){
         };
         fetchList();        
     }, [props.id_project]);
+
+    useEffect(() => {
+        const updateList = async () => {
+            const result = await NodeService.getStartNodes(props.id_project);
+            setNodes(result);
+            setLoading(false);
+        }
+        updateList();
+    }, [props.id_project, nodes]);
 
     return(
         <div className="card flex justify-content-center">

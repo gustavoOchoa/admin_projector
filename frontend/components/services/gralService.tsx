@@ -7,8 +7,8 @@ export const NodeService = {
             try {
                 let urlencoded = new URLSearchParams();
                 urlencoded.append("uid", id_project);
-                const res = await API.post(process.env['BACKEND'] + '/test', urlencoded);
-                resolve(res.data);
+                const res = await API.post(process.env['BACKEND'] + 'project/get_list', urlencoded);
+                resolve(res.data.list);
             }
             catch (e) {
                 reject(e);
@@ -16,18 +16,4 @@ export const NodeService = {
         })
     },
 
-    getNode(id_project: string, id_node:string):Promise<nodeInter[]> {
-        return new Promise<nodeInter[]>(async (resolve, reject) => {
-            try {
-                let urlencoded = new URLSearchParams();
-                urlencoded.append("uid", id_project);
-                urlencoded.append("node", id_node);
-                const res = await API.post(process.env['BACKEND'] + '/project/get_node', urlencoded);
-                resolve(res.data.node);
-            }
-            catch (e) {
-                reject(e);
-            }
-        })
-    }
 }

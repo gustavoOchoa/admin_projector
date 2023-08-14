@@ -52,30 +52,9 @@ class ProjectController extends BaseController{
         try {
             $model = new ProjectModel();
             $proj_id = $this->request->getPost('uid');
-            $list = $model->getlist(0, $proj_id);
+            $list = $model->getlist($proj_id);
             $resp = [
                 'list' => $list,
-                'resultado' => 'OK'
-            ];
-            return $this->response->setJSON($resp)->setStatusCode(200);
-        }
-        catch (\Exception $e) {
-            $resp = [
-                'message' => html_entity_decode($e->getMessage()),
-                'resultado' => 'NOOK'
-            ];
-            return $this->response->setJSON($resp)->setStatusCode(409);
-        }
-    }
-
-    public function getInternalNode(){
-        try {
-            $model = new ProjectModel();
-            $proj_id = $this->request->getPost('uid');
-            $father_node = $this->request->getPost('node');
-            $list = $model->getlist($father_node, $proj_id);
-            $resp = [
-                'node' => $list,
                 'resultado' => 'OK'
             ];
             return $this->response->setJSON($resp)->setStatusCode(200);

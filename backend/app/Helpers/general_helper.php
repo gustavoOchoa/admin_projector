@@ -37,6 +37,18 @@ if (!function_exists('like_match')) {
     }
 }
 
+if(!function_exists('file_log')){
+
+    function file_log($whereAmI) {
+        $nombreArchivo = WRITEPATH.'stepper.txt';
+        $text = $whereAmI. PHP_EOL;
+        $archivo = fopen($nombreArchivo, "at");
+        fwrite($archivo, $text);
+        fclose($archivo);
+    }
+
+}
+
 if(!function_exists('getTokenVal')){
 
     function getTokenVal($val){

@@ -30,8 +30,10 @@ export interface nodeInter{
 }
 
 export interface dotPanel{
+    type: string
     id_project: number | string
     id_folder: number | string
+    name?: string
 }
 
 export interface itemFolder{
