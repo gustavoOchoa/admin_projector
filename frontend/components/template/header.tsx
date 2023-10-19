@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import st from './template.module.css';
 
 export default function Header({visible, setMenuVisible}: any){

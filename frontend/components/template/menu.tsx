@@ -10,6 +10,7 @@ import style from './template.module.css';
 
 export default function Menu({ menuVisible }:any){
     const [tabVisible, setTabVisible] = useState<number | undefined | null>(null);
+    const [classVal, setClassVal] = useState(style.show);
     const [projects, setProjects] = useState<projectMenu[]>([]);
     const staticMenuData = [
         {
@@ -35,7 +36,8 @@ export default function Menu({ menuVisible }:any){
     return (
         <nav 
             id="sidebar-menu"
-            className="pr-1 overflow-x-hidden w-[230px]" 
+            className={['pr-1', 'overflow-x-hidden', 'w-[230px]', classVal].join(' ')}
+            aria-describedby={menuVisible? 'open' : 'close' }
         >
             <div className="mh-18 text-center py-5">
                 <a href="#" className="relative">
