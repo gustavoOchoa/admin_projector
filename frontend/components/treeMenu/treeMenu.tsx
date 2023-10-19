@@ -70,14 +70,14 @@ export default function TreeMenu(props: InterTreeMenu){
         fetchList();        
     }, [props.id_project]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const updateList = async () => {
             const result = await NodeService.getStartNodes(props.id_project);
             setNodes(result);
             setLoading(false);
         }
         updateList();
-    }, [props.id_project, nodes]);
+    }, [props.id_project, nodes]);*/
 
     return(
         <div className="card flex justify-content-center">
