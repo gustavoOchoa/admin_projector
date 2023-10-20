@@ -6,9 +6,9 @@ import loggon from '@/app/services/loginService';
 import { setCookieToken } from '@/app/components/api/api';
 import { useRouter } from 'next/navigation';
 import { parseCookies, destroyCookie } from 'nookies';
-import Image from 'next/image';
 import { Toast } from 'primereact/toast';
 import { InputText } from 'primereact/inputtext';
+
 
 export default function Home() {
   const route = useRouter();
@@ -117,7 +117,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{process.env['PAGE_TITLE']}</title>
+        <title>{process.env.PAGE_TITLE}</title>
         <link rel="icon" href="favicon.ico" />
       </Head>
       <div className="card flex justify-content-center">

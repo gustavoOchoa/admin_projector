@@ -16,12 +16,12 @@ export default function Menu({ menuVisible }:any){
         {
             svg: 'images/home.svg',
             title: 'Inicio',
-            url: '/dashboard'
+            url: '/admin'
         },
         {
             svg: 'images/notifications.svg',
             title: 'Notificaciones',
-            url: '/notifications'
+            url: '/admin/notifications'
         }
     ];
 

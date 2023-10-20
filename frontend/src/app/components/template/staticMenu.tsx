@@ -22,7 +22,7 @@ export default function StaticMenu(props: staticMenuInter){
                             height='30'
                         />
                     </div>
-                    <div className="hidden xl:flex items-center w-full ml-3 text-white font-medium">
+                    <div className="items-center w-full ml-3 text-white font-medium">
                         {props.title} 
                     </div>
                 </Link>

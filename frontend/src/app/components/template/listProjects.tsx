@@ -40,7 +40,7 @@ export default function ListProject(props: projectMenu){
                     </div>
                     </h2>
                     <div className={[style.proj_actions].join(' ')}>
-                        <DotPanel id_project={props.id_project} id_folder={0} />
+                        <DotPanel id_project={props.id_project} id_folder={0} type="otro" />
                     </div>
                 </div>
                 <div className={[style.proj_body].join(' ')}>

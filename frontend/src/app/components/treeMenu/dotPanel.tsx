@@ -49,7 +49,7 @@ export default function DotPanel(props: dotPanel){
     ];
 
     return(
-        <div className={['dot_panel', (props.type=='folder')? '' : '' ].join(' ')} key={Number(props.id_folder)}>
+        <div className={['dot_panel', (props.type=='folder')? 'folder' : '' ].join(' ')} key={Number(props.id_folder)}>
             <Button 
                 type="button" 
                 className={[st.folder_dots].join(' ')}
