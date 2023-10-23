@@ -1,5 +1,3 @@
-import './globals.css';
-import "primereact/resources/primereact.min.css";
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {

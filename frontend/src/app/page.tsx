@@ -2,8 +2,8 @@
 import React from "react";
 import { useEffect, useState, useRef } from 'react';
 import Head from "next/head";
-import loggon from '@/app/services/loginService';
-import { setCookieToken } from '@/app/components/api/api';
+import loggon from '@/services/loginService';
+import { setCookieToken } from '@/components/api/api';
 import { useRouter } from 'next/navigation';
 import { parseCookies, destroyCookie } from 'nookies';
 import { Toast } from 'primereact/toast';
@@ -116,10 +116,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>{process.env.PAGE_TITLE}</title>
-        <link rel="icon" href="favicon.ico" />
-      </Head>
       <div className="card flex justify-content-center">
         <Toast ref={toast} />
       </div>

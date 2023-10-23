@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import st from './addItemFolder.module.css';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
-import { itemFolder } from "@/app/types/types";
+import { itemFolder } from "@/types/types";
 
 export default function AddItemFolder(props: itemFolder){
     

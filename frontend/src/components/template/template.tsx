@@ -10,7 +10,7 @@ export default function Template({ children }: { children: React.ReactNode }){
     return(
         <>
             <Head>
-                <title>Projector</title>
+                <link rel="icon" href="./favicon.ico" sizes="any" />
             </Head>
             <div>
                 <div className="flex mt-[4.7rem] md:mt-0">

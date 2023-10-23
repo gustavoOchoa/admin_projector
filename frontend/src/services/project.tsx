@@ -1,4 +1,4 @@
-import API from "@/app/components/api/api";
+import API from "@/components/api/api";
 import { projectMenu } from "../types/types";
 
 const newProject = (formData: any) => {

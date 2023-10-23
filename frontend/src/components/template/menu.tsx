@@ -4,8 +4,8 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import Projects from "./projects";
 import Favorites from "./favorites";
 import Documents from "./documents";
-import { getProject } from "@/app/services/project";
-import { projectMenu } from "@/app/types/types";
+import { getProject } from "@/services/project";
+import { projectMenu } from "@/types/types";
 import style from './template.module.css';
 
 export default function Menu({ menuVisible }:any){

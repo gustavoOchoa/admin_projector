@@ -1,4 +1,4 @@
-import API from "@/app/components/api/api";
+import API from "@/components/api/api";
 
 const loggon = (formData: any) => {
   return new Promise(async (resolve, reject) => {

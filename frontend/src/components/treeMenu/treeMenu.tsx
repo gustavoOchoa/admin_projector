@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { InterTreeMenu, nodeInter } from "@/app/types/types";
+import { InterTreeMenu, nodeInter } from "@/types/types";
 import { Tree } from 'primereact/tree';
-import { NodeService } from '@/app/services/gralService';
+import { NodeService } from '@/services/gralService';
 import st from './treeMenu.module.css';
 import Link from "next/link";
 import DotPanel from "./dotPanel";

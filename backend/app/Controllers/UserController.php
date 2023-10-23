@@ -59,7 +59,7 @@ class UserController extends BaseController{
                 ];
                 return $this->response->setJSON($result)->setStatusCode(200);
             }
-            return $this->getJWTForUser($email);
+            return $this->getJWTForUser($email, $exist[0]['id_user'], $exist[0]['username']);
         }
         catch (Exception $exception){
             $result = [
@@ -70,17 +70,31 @@ class UserController extends BaseController{
         }
     }
 
-    private function getJWTForUser($emailAddress, $responseCode = ResponseInterface::HTTP_OK){
+    private function getJWTForUser($emailAddress, $id_user, $username){
         try {
-            $model = new UserModel();
+            helper('cookie');
             helper('projector_helper');
-            $user = $model->findUserByEmailAddress($emailAddress);
+            $token = getSignedJWTForUser($emailAddress, $id_user);
             $result = [
                 'error' => 'OK',
-                'user' => $user->username,
-                'access_token' => getSignedJWTForUser($emailAddress)
+                'user' => $username
             ];
+            $cookieExpiration = time() + getenv('JWT_TIME_TO_LIVE');
+
+            $cookie = [
+                'name'     => 'token',
+                'value'    => $token,
+                'expire'   => $cookieExpiration,
+                'domain'   => getenv('DOMAIN'),
+                'path'     => getenv('PATH'),
+                'secure'   => (getenv('SECURE') == 'false')? false : true,
+                'httponly' => (getenv('HTTP_ONLY') == 'false')? false : true,
+                'samesite' => getenv('SAMESITE')
+            ];
+            set_cookie($cookie);
+
             return $this->response->setJSON($result)->setStatusCode(200);
+            
         } catch (Exception $exception) {
             $result = [
                 'error' => $exception->getMessage(),

@@ -4,7 +4,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { Button } from 'primereact/button';
 import { MegaMenu } from 'primereact/megamenu';
 import { MenuItem } from 'primereact/menuitem';
-import { dotPanel } from "@/app/types/types";
+import { dotPanel } from "@/types/types";
 import { Dialog } from 'primereact/dialog';
 import AddItemFolder from "./addItemFolder";
 

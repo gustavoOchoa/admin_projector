@@ -7,21 +7,21 @@
 }
 .pr_doc{
     filter: invert();
-    background-image: url('../../../../public/images/file.svg');
+    background-image: url('../../../public/images/file.svg');
     background-size: cover;
     width: 16px;
     height: 16px;
 }
 .pr_list{
     filter: invert();
-    background-image: url('../../../../public/images/list.svg');
+    background-image: url('../../../public/images/list.svg');
     background-size: cover;
     width: 16px;
     height: 16px;
 }
 .caret_right{
     filter: invert();
-    background-image: url('../../../../public/images/toggler_icon_close.svg');
+    background-image: url('../../../public/images/toggler_icon_close.svg');
     background-size: cover;
     width: 16px;
     height: 16px;
@@ -29,7 +29,7 @@
 }
 .caret_down{
     filter: invert();
-    background-image: url('../../../../public/images/toggler_icon_close.svg');
+    background-image: url('../../../public/images/toggler_icon_close.svg');
     background-size: cover;
     width: 16px;
     height: 16px;

@@ -73,15 +73,16 @@ if(!function_exists('getSecretKey')){
 }
 
 if(!function_exists('getSignedJWTForUser')){
-    function getSignedJWTForUser($email){
+    function getSignedJWTForUser($email, $id_user){
         helper('projector_helper');
         $issuedAtTime = time();
         $tokenTimeToLive = getenv('JWT_TIME_TO_LIVE');
         $tokenExpiration = $issuedAtTime + $tokenTimeToLive;
         $payload = [
+            'uuid' => $id_user,
             'email' => $email,
             'iat' => $issuedAtTime,
-            'exp' => $tokenExpiration,
+            'exp' => $tokenExpiration
         ];
 
         $jwt = JWT::encode($payload, getSecretKey(), 'HS256');

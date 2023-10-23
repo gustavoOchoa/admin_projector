@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from 'next/link';
 import st from './template.module.css';
-import { staticMenuInter } from "@/app/types/types";
+import { staticMenuInter } from "@/types/types";
 
 export default function StaticMenu(props: staticMenuInter){
     

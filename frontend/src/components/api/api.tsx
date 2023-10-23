@@ -41,8 +41,8 @@ const Api = () => {
 
 export const setCookieToken = (token: any) => {
   setCookie(null, 'token', token, {
-    secure: process.env['ENVIROMENT'] !== 'development',
-    maxAge: process.env['MAXAGE'],
+    secure: process.env.ENVIROMENT !== 'development',
+    maxAge: Number(process.env.MAXAGE),
     sameSite: "strict",
     path: "/",
   });

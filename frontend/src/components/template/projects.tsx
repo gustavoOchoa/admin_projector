@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { InterProjectComponent } from "@/app/types/types";
+import { InterProjectComponent } from "@/types/types";
 import style from './template.module.css';
-import newProject from "@/app/services/project";
+import newProject from "@/services/project";
 import ListProject from "./listProjects";
 
 export default function Projects(props: InterProjectComponent){

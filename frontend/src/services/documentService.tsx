@@ -1,5 +1,5 @@
 import { nodeInter } from "../types/types";
-import API from "@/app/components/api/api";
+import API from "@/components/api/api";
 
 export const DocService = {
     getDocumentData(id_document: string):Promise<any> {

@@ -56,11 +56,9 @@
 .proj_open{
     transform: rotate(90deg);
     transition: all ease .35s;
-    filter: invert();
 }
 .proj_close{
     transition: all ease .35s;
-    filter: invert();
 }
 .list_dots{
     cursor: pointer;
