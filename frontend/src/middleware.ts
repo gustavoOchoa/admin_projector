@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
 
     const res = NextResponse.next();
 
-    const session: any = await request.cookies.get('token');
+    const session: any = await request.cookies.get('access_token');
 
     if(!session){
         return NextResponse.redirect(new URL('/unauthorized', request.url)) // redirect to /unauthorized page
@@ -23,7 +23,6 @@ export async function middleware(request: NextRequest) {
     return res;
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/((?!api|_next/static|favicon.ico).*)', '/admin*']
+    matcher: '/admin/:path*'
 }

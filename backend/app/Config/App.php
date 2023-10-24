@@ -315,7 +315,7 @@ class App extends BaseConfig
      *
      * @deprecated use Config\Cookie::$samesite property instead.
      */
-    public ?string $cookieSameSite = 'Lax';
+    public ?string $cookieSameSite = 'Strict';
 
     /**
      * --------------------------------------------------------------------------
@@ -423,7 +423,7 @@ class App extends BaseConfig
      *
      * @deprecated `Config\Cookie` $samesite property is used.
      */
-    public string $CSRFSameSite = 'Lax';
+    public string $CSRFSameSite = 'Strict';
 
     /**
      * --------------------------------------------------------------------------

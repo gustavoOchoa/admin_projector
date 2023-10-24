@@ -1,5 +1,5 @@
 # Disable directory browsing
-Options -Indexes
+Options All -Indexes
 
 # ----------------------------------------------------------------------
 # Rewrite engine
@@ -47,9 +47,12 @@ Options -Indexes
 	Header set X-Frame-Options SAMEORIGIN
 	Header set X-XSS-Protection "1; mode=block"
 	#reglas para los CORS
-	Header set Access-Control-Allow-Origin "*"
-    Header set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Accept, Origin, Authorization, token, param, target"
+	# header Access-Control-Allow-Credentials: "true"
+	Header set Access-Control-Allow-Origin "http://localhost:3000"
+    Header set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Accept, Origin, Authorization, token"
     Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set X-Content-Type-Options nosniff
+    Header set Content-Security-Policy "default-src 'self';"
 </ifModule>
 # Disable server signature start
 	ServerSignature Off

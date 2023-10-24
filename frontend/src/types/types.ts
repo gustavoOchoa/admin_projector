@@ -1,4 +1,15 @@
-import { SetStateAction } from "react"
+import { ReactNode, SetStateAction } from "react"
+
+export interface contextProps{
+    children?: ReactNode
+}
+
+export interface appContextinter{
+    username: string | null
+    email: string | null
+    userType: string | null
+    avatar: string | null
+}
 
 export interface staticMenuInter{
     svg: string

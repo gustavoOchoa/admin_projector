@@ -50,4 +50,13 @@ class UserModel extends Model {
         ];
         $builder->insert($data);
     }
+
+    public function getUserDataByEmail($email){
+        $builder = $this->db->table('users');
+        $query = $builder->select("username, email, user_type, avatar")
+            ->where('email', $email)
+            ->get();
+        $ret = $query->getResultArray();
+        return $ret[0];
+    }
 }

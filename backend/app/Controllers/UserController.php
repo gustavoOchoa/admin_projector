@@ -46,6 +46,7 @@ class UserController extends BaseController{
     }
 
     public function login(){
+        helper('cookie');
         $userModel = new UserModel();
         $email = base64_decode($this->request->getPost('email'));
         $password = base64_decode($this->request->getPost('password'));
@@ -57,6 +58,17 @@ class UserController extends BaseController{
                     'error' => 'No se ha encontrado a su Usuario en nuestra base de datos',
                     'access_token' => ''
                 ];
+
+                $cookie = [
+                    'name'     => 'access_token',
+                    'value'    => null,
+                    'expire'   => 0,
+                    'path'     => getenv('COOKIE_PATH'),
+                    'secure'   => (getenv('COOK_SECURE') == 'false')? false : true,
+                    'httponly' => (getenv('COOK_HTTP_ONLY') == 'false')? false : true,
+                    'samesite' => getenv('SAMESITE')
+                ];
+                set_cookie($cookie);
                 return $this->response->setJSON($result)->setStatusCode(200);
             }
             return $this->getJWTForUser($email, $exist[0]['id_user'], $exist[0]['username']);
@@ -71,30 +83,34 @@ class UserController extends BaseController{
     }
 
     private function getJWTForUser($emailAddress, $id_user, $username){
+        $userModel = new UserModel();
         try {
             helper('cookie');
             helper('projector_helper');
             $token = getSignedJWTForUser($emailAddress, $id_user);
+            $userData = $userModel->getUserDataByEmail($emailAddress);
             $result = [
                 'error' => 'OK',
-                'user' => $username
+                'user' => $username,
+                'email' => $userData['email'],
+                'user_type' => $userData['user_type'],
+                'avatar' => $userData['avatar']
             ];
-            $cookieExpiration = time() + getenv('JWT_TIME_TO_LIVE');
+            $cookieExpiration = time();
 
             $cookie = [
-                'name'     => 'token',
+                'name'     => 'access_token',
                 'value'    => $token,
                 'expire'   => $cookieExpiration,
-                'domain'   => getenv('DOMAIN'),
-                'path'     => getenv('PATH'),
-                'secure'   => (getenv('SECURE') == 'false')? false : true,
-                'httponly' => (getenv('HTTP_ONLY') == 'false')? false : true,
+                'path'     => getenv('COOKIE_PATH'),
+                'secure'   => (getenv('COOK_SECURE') == 'false')? false : true,
+                'httponly' => (getenv('COOK_HTTP_ONLY') == 'false')? false : true,
                 'samesite' => getenv('SAMESITE')
             ];
             set_cookie($cookie);
 
             return $this->response->setJSON($result)->setStatusCode(200);
-            
+
         } catch (Exception $exception) {
             $result = [
                 'error' => $exception->getMessage(),

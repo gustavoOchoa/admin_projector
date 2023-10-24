@@ -1,11 +1,8 @@
 "use client"
 import React from "react";
 import { useEffect, useState, useRef } from 'react';
-import Head from "next/head";
 import loggon from '@/services/loginService';
-import { setCookieToken } from '@/components/api/api';
 import { useRouter } from 'next/navigation';
-import { parseCookies, destroyCookie } from 'nookies';
 import { Toast } from 'primereact/toast';
 import { InputText } from 'primereact/inputtext';
 
@@ -20,20 +17,8 @@ export default function Home() {
     open: false,
     token: ''
   });
+  
   const toast = useRef<Toast>(null);
-
-  const onHideResetPass = () => {
-    setDialogResetPassProps({
-      open: false,
-      token: ''
-    });
-  };
-  // Obtenemos cookies actuales
-  const cookies = parseCookies();
-  const [cookieMsg, setCookieMsg] = useState({
-    message: '',
-    type: ''
-  });
 
   const handleOnChange = (e: any) => {
     const { name, value } = e.target;
@@ -53,35 +38,22 @@ export default function Home() {
     }
   }
 
-  // @ts-ignore
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Limpiamos errores
+
     setError('');
     setLogged('pending');
     try {
       let auth: any = await loggon({ email, password });
       if (auth.error !== 'OK') {
-        // Otros errores
-        await setError(auth.error);
-        await showError(auth.error);
-        localStorage.clear();
+        //Errores
+        console.log(auth);
+        setError(auth.error);
+        showError(auth.error);
       } 
-      else if (auth.reset_pass) {
-        console.log('reset_pass');
-        // Mostramos formulario para resetear clave
-        setEmail('');
-        setPassword('');
-        setDialogResetPassProps({
-          open: true,
-          token: auth.access_token
-        });
-      } 
-      else {
-        // Mandamos al dashboard
-        console.log('else');
-        let retSuccess = await setCookieToken(auth.access_token);
-        route.push('/dashboard');
+      else{
+        
+        //route.push('/dashboard');
       }
     }
     catch (e) {
@@ -92,27 +64,6 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    if (cookies['mensaje_error'] != undefined) {
-      // Mostramos en alert
-      setCookieMsg({
-        message: cookies['mensaje_error'],
-        type: 'error'
-      });
-      // Eliminamos cookie
-      destroyCookie(null, 'mensaje_error');
-    }
-
-    if (cookies['mensaje_success'] != undefined) {
-      // Mostramos en alert
-      setCookieMsg({
-        message: cookies['mensaje_success'],
-        type: 'success'
-      });
-      // Eliminamos cookie
-      destroyCookie(null, 'mensaje_success');
-    }
-  }, [dialogResetPassProps])
 
   return (
     <>
