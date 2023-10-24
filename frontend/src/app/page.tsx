@@ -5,7 +5,7 @@ import loggon from '@/services/loginService';
 import { useRouter } from 'next/navigation';
 import { Toast } from 'primereact/toast';
 import { InputText } from 'primereact/inputtext';
-
+import { GlobalContextProvider, useGlobalContext } from "@/components/context/appContext";
 
 export default function Home() {
   const route = useRouter();
@@ -17,7 +17,7 @@ export default function Home() {
     open: false,
     token: ''
   });
-  
+  const {appData, setAppdata} = useGlobalContext();
   const toast = useRef<Toast>(null);
 
   const handleOnChange = (e: any) => {
@@ -45,6 +45,13 @@ export default function Home() {
     setLogged('pending');
     try {
       let auth: any = await loggon({ email, password });
+      let user = {
+        username: auth.user,
+        email: auth.email,
+        userType: auth.user_type,
+        avatar: auth.avatar
+      };
+
       if (auth.error !== 'OK') {
         //Errores
         console.log(auth);
@@ -52,8 +59,8 @@ export default function Home() {
         showError(auth.error);
       } 
       else{
-        
-        //route.push('/dashboard');
+        setAppdata(user);
+        route.push('/admin');
       }
     }
     catch (e) {

@@ -1,31 +1,41 @@
-import { createContext, useContext, useState } from 'react';
-import { appContextinter, contextProps } from '@/types/types'; 
+"use client";
+import { SetStateAction, createContext, useContext, useState, Dispatch } from 'react';
 
-const AppContext = createContext<appContextinter>({
-    username: null,
-    email: null,
-    userType: null,
-    avatar: null
+type UserType = {
+    username: string | null
+    email: string | null
+    userType: string | null
+    avatar: string | null
+}
+
+interface appContextinter{
+    appData: UserType
+    setAppdata: Dispatch<SetStateAction<any>>
+}
+
+const GlobalContext = createContext<appContextinter>({
+    appData: {
+        username: null,
+        email: null,
+        userType: null,
+        avatar: null
+    },
+    setAppdata: (): any => {}
 });
 
-export const AppContextProvider = ({ children }: contextProps ) => {
-    const [username, setUsername] = useState({
+export const GlobalContextProvider = ({ children }: any) => {
+    const [appData, setAppdata] = useState<UserType>({
         username: null,
         email: null,
         userType: null,
         avatar: null
     });
-    
-    return(
-        <AppContext.Provider value={{
-            username: null,
-            email: null,
-            userType: null,
-            avatar: null
-        }} >
+
+    return (
+        <GlobalContext.Provider value={{ appData, setAppdata }}>
             { children }
-        </AppContext.Provider>
+        </GlobalContext.Provider>
     );
 }
 
-export default AppContext;
+export const useGlobalContext = () => useContext(GlobalContext);

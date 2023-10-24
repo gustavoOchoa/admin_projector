@@ -1,6 +1,7 @@
 import './globals.css';
 import "primereact/resources/primereact.min.css";
 import type { Metadata } from 'next'
+import { GlobalContextProvider } from '@/components/context/appContext';
 
 export const metadata: Metadata = {
   title: 'Projector',
@@ -14,7 +15,9 @@ export default function RootLayout({ children,}: { children: React.ReactNode}) {
 
   return (
     <html lang="en" className="h-full">
+      <GlobalContextProvider>
       <body className="h-full">{children}</body>
+      </GlobalContextProvider>
     </html>
   );
 }

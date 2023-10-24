@@ -1,14 +1,15 @@
 import Template from '@/components/template/template';
-import { useState } from 'react'; 
+import { GlobalContextProvider } from '@/components/context/appContext'; 
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-    const [currentUser, setCurrentUser] = useState();
 
     return (
         <>
+        <GlobalContextProvider>
             <Template>
                 { children }
             </Template>
+        </GlobalContextProvider>
         </>
     );
 }

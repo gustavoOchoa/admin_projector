@@ -7,8 +7,8 @@ export async function middleware(request: NextRequest) {
     const res = NextResponse.next();
 
     const session: any = await request.cookies.get('access_token');
-
-    if(!session){
+    console.log(session);
+    /*if(!session){
         return NextResponse.redirect(new URL('/unauthorized', request.url)) // redirect to /unauthorized page
     }
     
@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
     if (user?.admin !== "true") {
         // unauthorized to see pages inside admin/
         return NextResponse.redirect(new URL('/unauthorized', request.url)) // redirect to /unauthorized page
-    }
+    }*/
     
     return res;
 }
