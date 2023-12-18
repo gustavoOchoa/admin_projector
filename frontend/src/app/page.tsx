@@ -13,10 +13,6 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [logged, setLogged] = useState('off');
   const [error, setError] = useState('');
-  const [dialogResetPassProps, setDialogResetPassProps] = useState({
-    open: false,
-    token: ''
-  });
   const {appData, setAppdata} = useGlobalContext();
   const toast = useRef<Toast>(null);
 
@@ -54,12 +50,11 @@ export default function Home() {
 
       if (auth.error !== 'OK') {
         //Errores
-        console.log(auth);
         setError(auth.error);
         showError(auth.error);
       } 
       else{
-        setAppdata(user);
+        await setAppdata(user);
         route.push('/admin');
       }
     }
@@ -71,6 +66,9 @@ export default function Home() {
     }
   };
 
+  const handleRegister = () => {
+    route.push('/register');
+  }
 
   return (
     <>
@@ -123,6 +121,13 @@ export default function Home() {
                 >
                 Sign in
               </button>
+              <button 
+                type="button" 
+                className="mt-2 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handleRegister}
+                >
+                Register
+              </button>
             </div>
           </form>
           <div className="flex items-center justify-between">
@@ -130,10 +135,6 @@ export default function Home() {
               <a href="#" className="font-semibold text-white hover:text-indigo-300">Forgot password?</a>
             </div>
           </div>
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?
-            <a href="#" className="font-semibold leading-6 text-white hover:text-indigo-300">Start a 14 day free trial</a>
-          </p>
         </div>
       </div>
     </>

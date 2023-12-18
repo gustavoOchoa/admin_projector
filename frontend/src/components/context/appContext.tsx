@@ -6,6 +6,7 @@ type UserType = {
     email: string | null
     userType: string | null
     avatar: string | null
+    lang: string | null
 }
 
 interface appContextinter{
@@ -18,7 +19,8 @@ const GlobalContext = createContext<appContextinter>({
         username: null,
         email: null,
         userType: null,
-        avatar: null
+        avatar: null,
+        lang: null
     },
     setAppdata: (): any => {}
 });
@@ -28,7 +30,8 @@ export const GlobalContextProvider = ({ children }: any) => {
         username: null,
         email: null,
         userType: null,
-        avatar: null
+        avatar: null,
+        lang: null
     });
 
     return (

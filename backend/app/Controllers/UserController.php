@@ -12,34 +12,52 @@ class UserController extends BaseController{
 
     public function register(){
         helper('projector_helper');
-        $username = $this->request->getPost('username');
-        $password = $this->request->getPost('password');
-        $email = $this->request->getPost('email');
+        $username = base64_decode($this->request->getPost('username'));
+        $password = base64_decode($this->request->getPost('password'));
+        $email = base64_decode($this->request->getPost('email'));
+        $password2 = base64_decode($this->request->getPost('password2'));
+
+        if($password != $password2){
+            $result = [
+                "message" => 'Las contraseñas no son iguales.',
+                "error" => 'NOOK'
+            ];
+            return $this->response->setJSON($result)->setStatusCode(200);
+        }
+
         $userModel = new UserModel();
         $valid = $this->validateUser($username, $email);
         if($valid){
             $encrypPass = hash("sha256", $password);
-            pre($encrypPass);
             try{
                 $userModel->registerUser($username, $email, $encrypPass);
                 $result = [
-                    "message" => 'Usuario creado correctamente',
-                    "code" => 'OK'
+                    "message" => 'Usuario creado correctamente, pronto recibirá un correo para validar su email',
+                    "error" => 'OK'
                 ];
+                $emailStatus = $this->sendUserEmail($username, $email);
+                if($emailStatus->response != 'OK'){
+                    $result = [
+                        "message" => 'Hubo un error en el envio de email.',
+                        "error" => 'NOOK'
+                    ];
+                    return $this->response->setJSON($result)->setStatusCode(200);
+                }
+
                 return $this->response->setJSON($result)->setStatusCode(200);
             }
             catch (Exception $exception) {
                 $result = [
-                    'error' => $exception->getMessage(),
-                    'code' => 'NOOK'
+                    'message' => $exception->getMessage(),
+                    'error' => 'NOOK'
                 ];
-                return $this->response->setJSON($result)->setStatusCode(200);
+                return $this->response->setJSON($result)->setStatusCode(403);
             }
         }
         else{
             $result = [
                 "message" => $valid,
-                "code" => 'NOOK'
+                "error" => 'NOOK'
             ];
             return $this->response->setJSON($result)->setStatusCode(200);
         }
@@ -87,15 +105,20 @@ class UserController extends BaseController{
         try {
             helper('cookie');
             helper('projector_helper');
-            $token = getSignedJWTForUser($emailAddress, $id_user);
+
             $userData = $userModel->getUserDataByEmail($emailAddress);
+
+            $token = getSignedJWTForUser($emailAddress, $id_user, $userData['user_type']);
+
             $result = [
                 'error' => 'OK',
                 'user' => $username,
                 'email' => $userData['email'],
                 'user_type' => $userData['user_type'],
-                'avatar' => $userData['avatar']
+                'avatar' => $userData['avatar'],
+                'lang' => 'eng'
             ];
+
             $cookieExpiration = time();
 
             $cookie = [
@@ -128,5 +151,31 @@ class UserController extends BaseController{
         else{
             return 'El usuario ya existe!';
         }
+    }
+
+    private function sendUserEmail($username, $to){
+        $email = \Config\Services::email();
+        $view = \Config\Services::renderer();
+
+        $html = $view->setVar('message', 'Validar Email a traves del siguiente LINK')->render('emails/register-template');
+
+        $email->setTo($to);
+        $email->setFrom('gustavoeochoa@gmail.com', 'Projector Email Service');
+
+        $email->setSubject('Validación de Email de Registro');
+        $email->setMessage($html);
+
+        $obj = new \stdClass();
+        if($email->send()){
+            $obj->response = 'OK';
+            $obj->message = 'Se envió el correo electrónico.';
+        }
+        else{
+            $obj->response = 'NOOK';
+            $obj->email = $email;
+            $obj->error = $email->printDebugger(['body']);
+            $obj->message = 'No se pudo enviar el correo electrónico';
+        }
+        return $obj;
     }
 }

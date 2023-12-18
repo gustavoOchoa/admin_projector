@@ -33,15 +33,15 @@ $routes->options('(:any)', 'Home::options', ['filter' => 'cors']);
 
 
 $routes->get('/', 'Home::index');
-$routes->post('/user/register', 'UserController::register', ['filter' => 'cors']);
-$routes->post('/user/login', 'UserController::login',  ['filter' => 'cors']);
+$routes->post('/user/register', 'UserController::register');
+$routes->post('/user/login', 'UserController::login');
 
 
 /** Projects */
-$routes->post('/project', 'ProjectController::index',  ['filter' => 'cors']);
-$routes->post('/project/new_project', 'ProjectController::newProject',  ['filter' => 'cors']);
-$routes->post('/project/get_list', 'ProjectController::getList',  ['filter' => 'cors']);
-$routes->post('/project/get_node', 'ProjectController::getInternalNode',  ['filter' => 'cors']);
+$routes->post('/project', 'ProjectController::index');
+$routes->post('/project/new_project', 'ProjectController::newProject');
+$routes->post('/project/get_list', 'ProjectController::getList');
+$routes->post('/project/get_node', 'ProjectController::getInternalNode');
 
 $routes->post('/test', 'Test::index');
 /*

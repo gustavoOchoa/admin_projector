@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import st from './template.module.css';
+import UserPanel from "@/components/userpanel/userPanel";
+import NotificationsPanel from "@/components//notifications/notificationsPanel";
 
 export default function Header({visible, setMenuVisible}: any){
     const hide = ()=>{
@@ -56,7 +58,13 @@ export default function Header({visible, setMenuVisible}: any){
                         </button>
                     }
                 </div>
-                <div className={[st.header_rigth].join(' ')}></div>
+                <div className={[st.header_rigth].join(' ')}>
+                    <div className="flex justify-end w-full">
+                        <NotificationsPanel />
+
+                        <UserPanel />
+                    </div>
+                </div>
             </div>
         </>
     );

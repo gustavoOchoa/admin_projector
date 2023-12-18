@@ -5,21 +5,22 @@
     height: 50px;
     border-bottom: 3px solid #1C1B22;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 4px;
     height: 49px;
     flex-shrink: 0;
 }
 .header_left{
+    width: 100%;
     display: flex;
     align-items: center;
     overflow: auto;
 }
 .header_rigth{
-    justify-content: flex-end;
-    align-items: center;
     display: flex;
+    align-items: center;
     padding-right: 8px;
+    width: 100%;
 }
 .btn{
     width: 100%;

@@ -7682,3 +7682,7 @@
   opacity: 0;
   width: 0px;
 }
+
+.user_menu > ul > li.p-menu-separator{
+  border-top: 1px solid #FFFFFF !important;
+}

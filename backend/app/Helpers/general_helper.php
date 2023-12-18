@@ -73,7 +73,7 @@ if(!function_exists('getSecretKey')){
 }
 
 if(!function_exists('getSignedJWTForUser')){
-    function getSignedJWTForUser($email, $id_user){
+    function getSignedJWTForUser($email, $id_user, $user_type){
         helper('projector_helper');
         $issuedAtTime = time();
         $tokenTimeToLive = getenv('JWT_TIME_TO_LIVE');
@@ -81,6 +81,7 @@ if(!function_exists('getSignedJWTForUser')){
         $payload = [
             'uuid' => $id_user,
             'email' => $email,
+            'role' => $user_type,
             'iat' => $issuedAtTime,
             'exp' => $tokenExpiration
         ];
